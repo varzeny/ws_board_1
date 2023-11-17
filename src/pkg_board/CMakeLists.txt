@@ -18,20 +18,24 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
+
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
 
-include_directories(
-  include
-)
+include_directories(include)
 
 add_executable(board src/board.cpp)
 ament_target_dependencies(board
   rclcpp
+  std_msgs
 )
+
+target_link_libraries(board Boost::system)
 
 
 install(
